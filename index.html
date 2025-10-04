@@ -7,23 +7,26 @@
     <link href="style.css" rel="stylesheet"/>
 </head>
 <body>
-    <div class="portfilio">
+    <div class="portfolio">
         <main>
-            <div class="intro">
-                <h1>欢迎来到我的小站</h1>
-                <p>很高兴认识你！我叫阳，现在居住在武汉。我从2025年年初开始学习前端开发，HTML5，CSS3是我比较熟练的领域，同时也具备Javascript技能。目前正在学习前端框架。希望能成为一名出色的开发者和网络世界的贡献者。</p>
+            <div class="intro hidden">
+                <h1>欢迎来到我的小站</h1>   
+                <hr>             
+                <div class="hero">
+                    <h1>我是开发者,阳仔</h1>
+                    <img src="images/my-selfie.png" alt="my-selfie" class="selfie">                    
+                </div>
             </div>
-            <hr>
-            <div class="container">
-                <div class="project">
+            <div class="projects-container">
+                <div class="project hidden">
                     <a href="./3cStoreWeb/index.html"><img src="images/3Cstoreweb.png" alt="bootstrap-site">
                     <p>Bootstrap现代风格网站</a></p>  
                 </div>
-                <div class="project">
+                <div class="project hidden">
                     <a href="rock-paper-scissors-game/game.html"><img src="images/Rock-paper-scissors-game.png" alt="rock-sissor-paper-game">
                     <p>石头，剪刀，布小游戏</a></p>  
                 </div>
-                <div class="project">
+                <div class="project hidden">
                     <a href="https://lively-tiramisu-c631a2.netlify.app"><img src="images/react-ems.png" alt="react-ems">
                     <p>Ract员工管理列表</a></p>  
                 </div>
@@ -37,5 +40,6 @@
             </p>
         </footer>
     </div>
+    <script src="script.js"></script>
 </body>
 </html>
