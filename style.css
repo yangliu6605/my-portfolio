@@ -19,7 +19,8 @@ body {
 
 /* 开头介绍区域 */
 h1 {
-    font-size: 35px;
+   
+    font-size: 8vw;
     font-style: italic;
     text-align: center;
   }
@@ -34,7 +35,7 @@ h1 {
 }
 
 .hero h1 {
-    font-size: 30px;
+    font-size: 6vw;
     font-weight: bold;
 }
 
@@ -100,6 +101,24 @@ a {
 .project img {
     width: 200px;
     height: 260px;
+}
+
+@media (max-width: 600px) {
+        /* 整体容器宽度调整，让内容更宽 */
+        .portfolio {
+            width: 95%; /* 容器占据更多屏幕宽度 */
+            padding: 10px; /* 减少内边距 */
+        }
+
+    .selfie {
+        width: 100px;
+        height: 100px;
+    }
+
+    }
+    .project {
+        margin: 20px;
+    }
 }
 
 
