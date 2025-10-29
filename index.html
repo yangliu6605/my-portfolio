@@ -9,24 +9,32 @@
 <body>
     <div class="portfolio">
         <main>
-            <div class="intro hidden">
+            <div class="intro">
                 <h1>欢迎来到我的小站</h1>   
                 <hr>             
                 <div class="hero">
                     <h1>我是开发者,阳仔</h1>
-                    <img src="images/my-selfie.png" alt="my-selfie" class="selfie">                    
+                    <img src="images/my-selfie.png" alt="my-selfie" class="selfie">                  
                 </div>
             </div>
+            <!-- Gemini聊天AI -->
+            <div class="ai-response-container">
+                <input type="text" id="userInput" placeholder="请输入您的问题...">
+                <button onclick="sendMessage()">发送</button>
+                <div id="ai-response">
+                    <p id="ai-text"></p>
+                </div>
+            </div> 
             <div class="projects-container">
-                <div class="project hidden">
+                <div class="project">
                     <a href="./3cStoreWeb/index.html"><img src="images/3Cstoreweb.png" alt="bootstrap-site">
                     <p>Bootstrap现代风格网站</a></p>  
                 </div>
-                <div class="project hidden">
+                <div class="project">
                     <a href="rock-paper-scissors-game/game.html"><img src="images/Rock-paper-scissors-game.png" alt="rock-sissor-paper-game">
                     <p>石头，剪刀，布小游戏</a></p>  
                 </div>
-                <div class="project hidden">
+                <div class="project">
                     <a href="https://lively-tiramisu-c631a2.netlify.app"><img src="images/react-ems.png" alt="react-ems">
                     <p>React员工管理列表</a></p>  
                 </div>
