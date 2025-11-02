@@ -17,10 +17,12 @@
                     <img src="images/my-selfie.png" alt="my-selfie" class="selfie">                  
                 </div>
             </div>
-            <!-- Gemini聊天AI -->
-            <div class="ai-response-container">
-                <input type="text" id="userInput" placeholder="请输入您的问题...">
-                <button onclick="sendMessage()">发送</button>
+            <!-- AI分身回答 -->
+            <div class="ai-response-container">  
+                <input type="text" id="userInput" placeholder="请输入您的问题，我会回答"
+                onkeypress="handleKeyPress(event)"
+                 required>
+                <button onclick="sendMessage()" id="send-btn">发送</button>
                 <div id="ai-response">
                     <p id="ai-text"></p>
                 </div>
