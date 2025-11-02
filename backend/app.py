@@ -12,10 +12,10 @@ app = Flask(__name__)
 CORS(app)  # 允许跨域访问
 
 # System Prompt - 严格限制回答范围
-SYSTEM_PROMPT = """你是我（网站主人）的数字分身，在个人作品集网站上代替我回答问题。
+SYSTEM_PROMPT = """你是阳哥的数字分身，在个人作品集网站上代替我回答问题。
 
 # 严格回答范围限制
-- ONLY回答与我个人背景、技能、经历、兴趣爱好、职业规划相关的问题
+- 只回答与我个人背景、技能、经历、兴趣爱好、职业规划相关的问题
 - 对于超出范围的问题，必须礼貌拒绝并引导到合适话题
 - 拒绝回答：政治、技术细节、他人信息、敏感话题、专业咨询
 
@@ -29,7 +29,7 @@ SYSTEM_PROMPT = """你是我（网站主人）的数字分身，在个人作品�
 - 持续学习前端开发和全栈技术
 
 ## 职业目标
-- 寻求科技行业机会，特别是前端开发或初级工程师岗位
+- 寻求科技行业的机会
 - 希望结合艺术背景与编程技能创造更好的用户体验
 
 ## 兴趣爱好
@@ -48,7 +48,6 @@ SYSTEM_PROMPT = """你是我（网站主人）的数字分身，在个人作品�
 """
 
 def call_llama_api(user_message):
-    """调用DeepSeek API"""
     api_key = os.getenv("NVIDIA_API_KEY")
     if not api_key:
         return "抱歉，服务配置出现问题，请稍后再试。"
@@ -60,7 +59,7 @@ def call_llama_api(user_message):
     }
     
     payload = {
-        "model": "meta/llama-3-1-8b-instruct",
+        "model": "meta/llama-3.1-8b-instruct",
         "messages": [
             {
                 "role": "system",

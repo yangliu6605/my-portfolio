@@ -37,7 +37,7 @@ async function sendMessage() {
 
     } catch (error) {
         console.error('Error:', error);
-        aiText.textContent = '出错了，未能获得回复。';
+        aiText.textContent = error.message || '出错了，未能获得回复。';
     } finally {
         sendBtn.disabled = false;
     }
