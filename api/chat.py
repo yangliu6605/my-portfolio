@@ -1,17 +1,9 @@
-from flask import Flask, request, jsonify, send_from_directory
-from flask_cors import CORS
-import requests
-import os
-from dotenv import load_dotenv
+from http.server import BaseHTTPRequestHandler
 import json
+import os
+import requests
 
-# 加载环境变量
-load_dotenv()
-
-app = Flask(__name__)
-CORS(app)  # 允许跨域访问
-
-# System Prompt - 严格限制回答范围
+# 直接从 app.py 复制 SYSTEM_PROMPT 和 call_llama_api 函数
 SYSTEM_PROMPT = """你是阳哥，以他的口吻来回答问题。
 
 # 回答范围
@@ -88,58 +80,57 @@ def call_llama_api(user_message):
         response.raise_for_status()
         
         result = response.json()
-        print(result)
         return result['choices'][0]['message']['content']
         
     except requests.exceptions.Timeout:
         return "抱歉，响应超时，请稍后再试。"
     except requests.exceptions.RequestException as e:
-        print(f"API调用错误: {e}")
         return "抱歉，服务暂时不可用，请稍后再试。"
     except (KeyError, IndexError) as e:
-        print(f"API响应解析错误: {e}")
         return "抱歉，响应解析出现问题。"
 
-#静态文件服务
-@app.route('/')
-def serve_index():
-    return send_from_directory('../', 'index.html')
-
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory('../', path)
-
-# API路由
-@app.route('/api/chat', methods=['POST'])
-def chat_endpoint():
-    """处理聊天请求"""
-    try:
-        data = request.get_json()       
-        user_message = data['message'].strip()
-        
-        # 调用AI API
-        ai_reply = call_llama_api(user_message)
-        
-        return jsonify({
-            'reply': ai_reply,
-            'success': True
-        })
-        
-    except Exception as e:
-        print(f"服务器错误: {e}")
-        return jsonify({
-            'reply': '服务器内部错误，请稍后再试',
-            'success': False
-        }), 500
-
-# 健康检查端点
-@app.route('/health', methods=['GET'])
-def health_check():
-    return jsonify({
-        'status': 'healthy', 
-        'service': 'portfolio-ai-assistant',
-        'framework': 'Flask'
-    })
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5001)
+class Handler(BaseHTTPRequestHandler):
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
+    
+    def do_POST(self):
+        if self.path == '/api/chat':
+            self.handle_chat()
+        else:
+            self.send_response(404)
+            self.end_headers()
+    
+    def handle_chat(self):
+        try:
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            data = json.loads(post_data)
+            
+            user_message = data['message'].strip()
+            ai_reply = call_llama_api(user_message)
+            
+            response_data = {
+                'reply': ai_reply,
+                'success': True
+            }
+            
+            self.send_response(200)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            self.wfile.write(json.dumps(response_data).encode())
+            
+        except Exception as e:
+            self.send_response(500)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            error_response = {
+                'reply': '服务器内部错误，请稍后再试',
+                'success': False
+            }
+            self.wfile.write(json.dumps(error_response).encode())
