@@ -102,7 +102,7 @@ def call_llama_api(user_message):
 #     return send_from_directory('../', path)
 
 # API路由
-@app.route('/api/chat', methods=['POST'])
+@app.route('/chat', methods=['POST'])
 def chat_endpoint():
     """处理聊天请求"""
     try:
