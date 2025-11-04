@@ -93,13 +93,13 @@ def call_llama_api(user_message):
         return "抱歉，响应解析出现问题。"
 
 # 静态文件服务
-@app.route('/')
-def serve_index():
-    return send_from_directory('../', 'index.html')
+# @app.route('/')
+# def serve_index():
+#     return send_from_directory('../', 'index.html')
 
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory('../', path)
+# @app.route('/<path:path>')
+# def serve_static(path):
+#     return send_from_directory('../', path)
 
 # API路由
 @app.route('/api/chat', methods=['POST'])
