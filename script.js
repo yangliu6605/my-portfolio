@@ -19,7 +19,7 @@ async function sendMessage() {
     aiText.textContent = '思考中...';
 
     try{
-        const response = await fetch('/api/chat', {
+        const response = await fetch('/chat', {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
