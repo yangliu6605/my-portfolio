@@ -1,4 +1,9 @@
+html {
+    height: 100%;
+}
+
 body {
+    min-height: 100%;
     background-image: url(./images/bg-pic.jpg);
     background-repeat: no-repeat;
     background-size: cover;  
@@ -6,6 +11,7 @@ body {
     background-attachment: fixed;
     font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
     padding: 20px;
+    margin: 0;
 }
 
 .portfolio {
@@ -96,21 +102,29 @@ a {
 }
 
 @media (max-width: 600px) {
-        /* 整体容器宽度调整，让内容更宽 */
-        .portfolio {
-            width: 95%; /* 容器占据更多屏幕宽度 */
-            padding: 10px; /* 减少内边距 */
-        }
+    /* 修复移动端背景图片问题 */
+    body {
+        background-attachment: scroll; /* 移动端使用scroll代替fixed */
+        background-size: cover;
+        background-position: center top;
+        min-height: 100vh; /* 确保body至少占满视口高度 */
+    }
+
+    /* 整体容器宽度调整，让内容更宽 */
+    .portfolio {
+        width: 95%; /* 容器占据更多屏幕宽度 */
+        padding: 10px; /* 减少内边距 */
+    }
 
     .selfie {
         width: 100px;
         height: 100px;
     }
 
-    }
     .project {
         margin: 20px;
     }
+}
 
 /* Gemini AI调用 */
 .ai-response-container {
