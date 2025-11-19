@@ -98,19 +98,25 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
     
     def do_POST(self):
-        if self.path == '/api/chat':
-            self.handle_chat()
-        else:
-            self.send_response(404)
-            self.end_headers()
+        # Vercel已经通过路由配置处理了路径，直接处理请求
+        self.handle_chat()
     
     def handle_chat(self):
         try:
-            content_length = int(self.headers['Content-Length'])
+            content_length = int(self.headers.get('Content-Length', 0))
+            if content_length == 0:
+                raise ValueError('请求体为空')
+            
             post_data = self.rfile.read(content_length)
             data = json.loads(post_data)
             
+            if 'message' not in data:
+                raise ValueError('缺少message字段')
+            
             user_message = data['message'].strip()
+            if not user_message:
+                raise ValueError('消息不能为空')
+            
             ai_reply = call_llama_api(user_message)
             
             response_data = {
@@ -122,9 +128,20 @@ class Handler(BaseHTTPRequestHandler):
             self.send_header('Content-type', 'application/json')
             self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            self.wfile.write(json.dumps(response_data).encode())
+            self.wfile.write(json.dumps(response_data, ensure_ascii=False).encode('utf-8'))
             
+        except ValueError as e:
+            self.send_response(400)
+            self.send_header('Content-type', 'application/json')
+            self.send_header('Access-Control-Allow-Origin', '*')
+            self.end_headers()
+            error_response = {
+                'reply': str(e),
+                'success': False
+            }
+            self.wfile.write(json.dumps(error_response, ensure_ascii=False).encode('utf-8'))
         except Exception as e:
+            print(f"Error: {str(e)}")  # Vercel会记录这个日志
             self.send_response(500)
             self.send_header('Content-type', 'application/json')
             self.send_header('Access-Control-Allow-Origin', '*')
@@ -133,4 +150,4 @@ class Handler(BaseHTTPRequestHandler):
                 'reply': '服务器内部错误，请稍后再试',
                 'success': False
             }
-            self.wfile.write(json.dumps(error_response).encode())
+            self.wfile.write(json.dumps(error_response, ensure_ascii=False).encode('utf-8'))
