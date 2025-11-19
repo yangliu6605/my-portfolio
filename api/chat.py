@@ -76,17 +76,20 @@ def call_llama_api(user_message):
     }
     
     try:
-        response = requests.post(url, headers=headers, json=payload, timeout=30)
+        response = requests.post(url, headers=headers, json=payload, timeout=8)
         response.raise_for_status()
         
         result = response.json()
         return result['choices'][0]['message']['content']
         
     except requests.exceptions.Timeout:
+        print("NVIDIA API timeout")
         return "抱歉，响应超时，请稍后再试。"
     except requests.exceptions.RequestException as e:
+        print(f"NVIDIA API error: {str(e)}")
         return "抱歉，服务暂时不可用，请稍后再试。"
     except (KeyError, IndexError) as e:
+        print(f"Response parse error: {str(e)}")
         return "抱歉，响应解析出现问题。"
 
 class Handler(BaseHTTPRequestHandler):
