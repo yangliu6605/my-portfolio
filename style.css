@@ -26,7 +26,7 @@ body {
 /* 开头介绍区域 */
 h1 {
    
-    font-size: 8vw;
+    font-size: 2.5rem;
     font-style: italic;
     text-align: center;
   }
@@ -41,7 +41,7 @@ h1 {
 }
 
 .hero h1 {
-    font-size: 6vw;
+    font-size: 2rem;
     font-weight: bold;
 }
 
@@ -98,15 +98,14 @@ a {
 .project img {
     width: 200px;
     height: 260px;
-    border-radius: 5px; /* 为图片添加轻微圆角 */
+    border-radius: 5px; 
 }
 
 @media (max-width: 600px) {
-    /* 修复移动端背景图片问题 */
     body {
-        background-attachment: scroll; /* 移动端使用scroll代替fixed */
+        background-attachment: fixed; 
         background-size: cover;
-        background-position: center top;
+        background-position: center center;
         min-height: 100vh; /* 确保body至少占满视口高度 */
     }
 
@@ -114,6 +113,15 @@ a {
     .portfolio {
         width: 95%; /* 容器占据更多屏幕宽度 */
         padding: 10px; /* 减少内边距 */
+    }
+
+    /* 移动端标题使用较小的vw值 */
+    h1 {
+        font-size: 6vw;
+    }
+
+    .hero h1 {
+        font-size: 5vw;
     }
 
     .selfie {
