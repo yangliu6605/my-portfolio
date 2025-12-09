@@ -1,44 +1,64 @@
-const userInput = document.getElementById('userInput');
-const sendBtn = document.getElementById('send-btn');
-const aiText = document.getElementById('ai-text');
+const userInput = document.getElementById("userInput");
+const sendBtn = document.getElementById("send-btn");
+const aiText = document.getElementById("ai-text");
+const heroTypingEl = document.getElementById("hero-title");
 
-function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-        sendMessage();
-    }
+//标题打字机效果
+const typingPhrase = 'I am Yang, a software developer';
+const typingSpeed = 90;
+let charIndex = 0;
+
+function animateHeroTyping() {
+  if (!heroTypingEl) return;
+
+  heroTypingEl.textContent = typingPhrase.slice(0, charIndex);
+
+  if (charIndex < typingPhrase.length) {
+    charIndex += 1;
+    setTimeout(animateHeroTyping, typingSpeed);
+  }
 }
-async function sendMessage() {   
-    const userMessage = userInput.value.trim();
 
-    if (!userMessage) {
-        aiText.textContent = '请输入您的问题。';
-        return;
-    }
+animateHeroTyping();
 
-    sendBtn.disabled = true;
-    aiText.textContent = '思考中...';
+// AI问答输入框
+function handleKeyPress(event) {
+  if (event.key === 'Enter') {
+    sendMessage();
+  }
+}
 
-    try{
-        const response = await fetch('/api/chat', {
-            method: 'POST',
-            headers: {
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ message: userMessage })
-        });
+async function sendMessage() {
+  const userMessage = userInput.value.trim();
 
-        if (!response.ok) throw new Error('网络错误');
+  if (!userMessage) {
+    aiText.textContent = "请输入您的问题。";
+    return;
+  }
 
-        const data = await response.json();
+  sendBtn.disabled = true;
+  aiText.textContent = "思考中...";
 
-        if (!data.success) throw new Error(data.reply || '服务暂不可用');
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message: userMessage }),
+    });
 
-        aiText.textContent = data.reply;
+    if (!response.ok) throw new Error("网络错误");
 
-    } catch (error) {
-        console.error('Error:', error);
-        aiText.textContent = error.message || '出错了，未能获得回复。';
-    } finally {
-        sendBtn.disabled = false;
-    }
+    const data = await response.json();
+
+    if (!data.success) throw new Error(data.reply || "服务暂不可用");
+
+    aiText.textContent = data.reply;
+  } catch (error) {
+    console.error("Error:", error);
+    aiText.textContent = error.message || "出错了，未能获得回复。";
+  } finally {
+    sendBtn.disabled = false;
+  }
 }

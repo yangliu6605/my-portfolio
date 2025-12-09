@@ -1,180 +1,198 @@
 html {
-    height: 100%;
+  height: 100%;
 }
 
 body {
-    min-height: 100%;
-    background-image: url(./images/bg-pic.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;  
-    background-position: center; 
-    background-attachment: fixed;
-    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
-    padding: 20px;
-    margin: 0;
+  min-height: 100%;
+  background-image: url(./images/bg-pic.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  padding: 20px;
+  margin: 0;
 }
 
 .portfolio {
-    width: 80%;
-    background-color: rgba(220, 166, 116, 0.5);
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-    max-width: 900px;
+  width: 80%;
+  background-color: rgba(220, 166, 116, 0.5);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+  max-width: 900px;
 }
 
 /* 开头介绍区域 */
 h1 {
-   
-    font-size: 2.5rem;
-    font-style: italic;
-    text-align: center;
-  }
-
-.hero {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    margin: 40px auto;
+  font-size: 2.5rem;
+  font-style: italic;
+  text-align: center;
 }
 
-.hero h1 {
-    font-size: 2rem;
-    font-weight: bold;
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px auto;
+}
+
+.hero-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  min-height: 2.6rem;
+  display: inline-flex;
+}
+
+.hero-title::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 1.2em;
+  background-color: currentColor;
+  margin-left: 6px;
+  animation: hero-caret-blink 0.9s steps(2, jump-none) infinite;
+}
+
+@keyframes hero-caret-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  50.1%,
+  100% {
+    opacity: 0;
+  }
 }
 
 .selfie {
-    width: 150px;
-    height:150px;
+  width: 150px;
+  height: 150px;
 }
 
 footer p {
-    text-align: center;
-    font-size: 13px;
+  text-align: center;
+  font-size: 13px;
 }
 
 hr {
-    height: 2px;
-    background-color: rgb(195, 86, 23);
-    border-color: rgb(195, 86, 23);
+  height: 2px;
+  background-color: rgb(195, 86, 23);
+  border-color: rgb(195, 86, 23);
 }
 
 .bottom-line {
-    margin-top: 50px;
+  margin-top: 50px;
 }
-
 
 /* 项目展示区域 */
 a {
-    color: black;
-    text-decoration: none;
+  color: black;
+  text-decoration: none;
 }
 
 .project:hover {
-   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
-   transform: translateY(-5px);
-   transition: all 0.3s ease;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
 }
 
-.projects-container { 
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 50px;
-    justify-content: center;
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 50px;
+  justify-content: center;
 }
 
 .project {
-   background-color: rgba(220, 166, 116, 0.7); /* 更改背景颜色以匹配整体风格 */
-    margin: 40px;
-    text-align: center;
-    border: 2px solid rgb(195, 86, 23); /* 使用hr的颜色作为边框 */
-    border-radius: 10px; /* 添加圆角 */
-    padding: 15px; /* 添加内边距 */
-    transition: all 0.3s ease; /* 为悬停效果添加平滑过渡 */
+  background-color: rgba(220, 166, 116, 0.7); /* 更改背景颜色以匹配整体风格 */
+  margin: 40px;
+  text-align: center;
+  border: 2px solid rgb(195, 86, 23); /* 使用hr的颜色作为边框 */
+  border-radius: 10px; /* 添加圆角 */
+  padding: 15px; /* 添加内边距 */
+  transition: all 0.3s ease; /* 为悬停效果添加平滑过渡 */
 }
 
 .project img {
-    width: 200px;
-    height: 260px;
-    border-radius: 5px; 
+  width: 200px;
+  height: 260px;
+  border-radius: 5px;
 }
 
 @media (max-width: 600px) {
-    body {
-        background-attachment: fixed; 
-        background-size: cover;
-        background-position: center center;
-        min-height: 100vh; /* 确保body至少占满视口高度 */
-    }
+  body {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    min-height: 100vh; /* 确保body至少占满视口高度 */
+  }
 
-    /* 整体容器宽度调整，让内容更宽 */
-    .portfolio {
-        width: 95%; /* 容器占据更多屏幕宽度 */
-        padding: 10px; /* 减少内边距 */
-    }
+  /* 整体容器宽度调整，让内容更宽 */
+  .portfolio {
+    width: 95%; /* 容器占据更多屏幕宽度 */
+    padding: 10px; /* 减少内边距 */
+  }
 
-    /* 移动端标题使用较小的vw值 */
-    h1 {
-        font-size: 6vw;
-    }
+  /* 移动端标题使用较小的vw值 */
+  h1 {
+    font-size: 6vw;
+  }
 
-    .hero h1 {
-        font-size: 5vw;
-    }
+  .hero h1 {
+    font-size: 5vw;
+  }
 
-    .selfie {
-        width: 100px;
-        height: 100px;
-    }
+  .selfie {
+    width: 100px;
+    height: 100px;
+  }
 
-    .project {
-        margin: 20px;
-    }
+  .project {
+    margin: 20px;
+  }
 }
 
 /* Gemini AI调用 */
 .ai-response-container {
-    background-color: rgba(220, 166, 116, 0.7);
-    border: 2px solid rgb(195, 86, 23);
-    border-radius: 10px;
-    padding: 20px;
-    margin: 40px auto;
-    max-width: 80%;
-    text-align: center;
+  background-color: rgba(220, 166, 116, 0.7);
+  border: 2px solid rgb(195, 86, 23);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 40px auto;
+  max-width: 80%;
+  text-align: center;
 }
 
 #userInput {
-    width: 80%;
-    height: 40px;
-    margin: 20px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    padding: 0 10px;
+  width: 80%;
+  height: 40px;
+  margin: 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: rgb(195, 86, 23);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: rgb(195, 86, 23);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: rgb(237, 145, 63);
+  background-color: rgb(237, 145, 63);
 }
 
 #ai-response {
-    margin-top: 20px;
-    min-height: 20px;
+  margin-top: 20px;
+  min-height: 20px;
 }
-
-
-
-
