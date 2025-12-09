@@ -164,13 +164,17 @@ a {
   padding: 20px;
   margin: 40px auto;
   max-width: 80%;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap; /* 如果窄屏需要自动换行，可以保留这一行 */
 }
 
 #userInput {
-  width: 80%;
+  flex: 1 1 280px;
   height: 40px;
-  margin: 20px;
+  margin: 0;
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid #ccc;
@@ -186,6 +190,8 @@ button {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  flex: 0 0 auto;
+  display: inline-flex; 
 }
 
 button:hover {
